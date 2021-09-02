@@ -8,6 +8,10 @@ const error = (code, msg) => {
     message = '경로를 찾을 수 없습니다.'      
     break;
 
+    case 400: 
+    message = '잘못된 요청입니다.'      
+    break;
+
     case 401:
     message = '사용자 인증이 처리되지 않았습니다.'      
     break;
