@@ -1,14 +1,17 @@
-/*************** global init ***************/
-require('dotenv').config()
-const port = process.env.PORT
+/*************** global require ***************/
 const path = require('path')
 const express= require('express')
 const app = express()
+
+/*************** server init ***************/
+require('dotenv').config()
+require('./modules/server-init')(app, process.env.PORT)
 
 /*************** view engine **************/
 app.set('view engine', 'ejs')
 app.set('views', './views')
 app.locals.pretty=true
+app.locals.tabTitle = '게시판'
 
 /*************** middleware ***************/
 app.use(express.json())
@@ -24,11 +27,9 @@ const bookRouter = require('./routes/book')
 app.use('/book', bookRouter)
 
 /*************** error init ***************/
-const notFoundRouter = require('./routes/error/404-router')
-const errorRouter = require('./routes/error/500-router')
-app.use(notFoundRouter)
-app.use(errorRouter)
+const _404Router = require('./routes/error/404-router')
+const _500Router = require('./routes/error/500-router')
+app.use(_404Router)
+app.use(_500Router)
 
 
-/*************** server init ***************/
-app.listen(port, () => { console.log('http://127.0.0.1:'+port) } )

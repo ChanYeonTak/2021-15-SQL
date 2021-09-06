@@ -30,6 +30,16 @@ const error = (code, msg) => {
   return createError(code || 500, msg + '^^' + message);
 }
 
+const cutTail = (str, len=12) => str.length > len ? str.substr(0, len)+' ...' : str
+
 const location = src => path.join(__dirname, '../', src)
 
-module.exports = { error }
+const chgStatus = status => { 
+  switch (status) {
+    case '0': return '절판'
+    case '1': return '판매중'
+    case '2': return '발행예정'
+    defalut : return '기타'
+  }
+}
+module.exports = { error, location, cutTail, chgStatus }
