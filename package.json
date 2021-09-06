@@ -20,9 +20,9 @@
   },
   "name": "2021-15-sql",
   "version": "1.0.0",
-  "main": "01.app.js",
+  "main": "02.book.js",
   "scripts": {
-    "start": "nodemon 01.app",
+    "start": "nodemon 02.book.app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
