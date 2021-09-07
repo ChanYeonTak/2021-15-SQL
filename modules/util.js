@@ -42,4 +42,12 @@ const chgStatus = status => {
     defalut : return '기타'
   }
 }
-module.exports = { error, location, cutTail, chgStatus }
+
+const imgExt = ['jpg', 'jpeg', 'gif', 'png']
+const mediaExt = ['mp3', 'mp4']
+const docExt = ['ppt', 'pptx', 'xls', 'xlsx', 'doc', 'docx', 'hwp', 'pdf']
+const zipExt = ['zip', 'alz']
+
+const exts = { imgExt, mediaExt, docExt, zipExt }
+
+module.exports = { error, location, cutTail, chgStatus, exts }
