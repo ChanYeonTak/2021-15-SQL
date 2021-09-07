@@ -1,3 +1,7 @@
+*.ppt
+*.pptx
+storages
+
 # Logs
 logs
 *.log

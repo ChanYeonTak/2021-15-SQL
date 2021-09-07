@@ -22,7 +22,7 @@
   "version": "1.0.0",
   "main": "02.book.js",
   "scripts": {
-    "start": "nodemon 02.book.app",
+    "start": "nodemon 02.upload.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
