@@ -16,7 +16,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 		const pager = createPager(page, totalRecord)
 
 		sql = `
-		SELECT B.*, F.savename 
+		SELECT B.*, F.savename, F.fieldname
 		FROM books B LEFT JOIN files F 
 		ON B.idx = F.fidx 
 		WHERE b.status < 3 
