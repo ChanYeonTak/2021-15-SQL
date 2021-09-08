@@ -39,6 +39,7 @@ const chgStatus = status => {
     case '0': return '절판'
     case '1': return '판매중'
     case '2': return '발행예정'
+    case '3': return '삭제'
     defalut : return '기타'
   }
 }
