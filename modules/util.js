@@ -62,4 +62,7 @@ const getIcon = file => {
   return ''
 }
 
-module.exports = { error, location, cutTail, chgStatus, exts, relPath, getIcon }
+const isImg = file => imgExt.includes(path.extname(file).substr(1)) ? true : false
+  
+module.exports = { error, location, cutTail, chgStatus, exts, relPath, getIcon, isImg }
+
