@@ -1,6 +1,7 @@
 *.ppt
 *.pptx
 storages
+storages-remove
 
 # Logs
 logs

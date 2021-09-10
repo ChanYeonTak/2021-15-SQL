@@ -9,7 +9,7 @@ const createPager = require('../../modules/pager-init')
 router.get(['/', '/:page'], async (req, res, next) => {
 	let sql, values;
 	try {
-		sql = "SELECT COUNT(idx) FROM books WHERE status < 3"
+		sql = "SELECT COUNT(idx) FROM books WHERE status > '0'"
 		const [[cnt]] = await pool.execute(sql)
 		const totalRecord = cnt['COUNT(idx)']
 		const page = Number(req.params.page || 1)
@@ -23,7 +23,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 		ON B.idx = F.fidx AND F.fieldname = 'C'
 		LEFT JOIN files F2
 		ON B.idx = F2.fidx AND F2.fieldname = 'U'
-		WHERE B.status < 3
+		WHERE B.status > '0'
 		ORDER BY B.idx DESC
 		LIMIT ?, ?`
 
