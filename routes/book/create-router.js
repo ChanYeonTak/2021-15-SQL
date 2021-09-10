@@ -22,7 +22,7 @@ async (req, res, next) => {
         await pool.execute(sql, values)
        }
     }
-    res.redirect('/book')
+    res.redirect(`${req.lang}/book`)
   }
   catch (err) {
     nexr(error(500, err))

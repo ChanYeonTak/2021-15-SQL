@@ -4,12 +4,13 @@ const { error } = require('../../modules/util')
 const { pool } = require('../../modules/mysql-init')
 
 router.put('/', async (req, res, next) => {
+	req.app.locals.PAGE = 'UPDATE' 
 	try {
 		const { title, writer, content, idx } = req.body
 		const sql = 'UPDATE books SET title=?, writer=?, content=? WHERE idx=?'
 		const values = [title, writer, content, idx]
 		const [rs] = await pool.execute(sql, values)
-		if(rs.affectedRows === 1) res.redirect('/book')
+		if(rs.affectedRows === 1) res.redirect(`${req.lang}/book`)
 		else next(error(500, '데이터가 수정되지 않았습니다.'))
 	}
 	catch(err) {
