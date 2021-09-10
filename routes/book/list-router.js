@@ -39,8 +39,8 @@ router.get(['/', '/:page'], async (req, res, next) => {
 			v.icon = v.icon ? getIcon(v.icon) : null
 		})
 	
-		const title = '도서 목록'
-		const description = '등록된 도서들의 리스트 입니다.'
+		const title = req.lang.TITLE_LIST
+		const description = req.lang.DESC_LIST
 		const js = 'book/list'
 		const css = 'book/list'
 		res.status(200).render('book/list', { title, description, js, css, books, pager })
