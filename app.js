@@ -19,7 +19,7 @@ app.locals.tabTitle = '도서 검색 게시판'
 /*************** middleware ***************/
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(methodInit())
+app.use(methodInit()) // method-override
 
 /*************** static init **************/
 app.use('/', express.static(path.join(__dirname, 'public')))
