@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const cors = require('cors')
 const methodInit = require('./modules/method-init')
 
 /*************** server init **************/
@@ -10,6 +11,7 @@ require('./modules/server-init')(app, process.env.PORT_API)
 
 
 /*************** middleware ***************/
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(methodInit()) // method-override
