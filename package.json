@@ -25,6 +25,7 @@
   "main": "02.book.js",
   "scripts": {
     "start": "nodemon app",
+    "api": "nodemon api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

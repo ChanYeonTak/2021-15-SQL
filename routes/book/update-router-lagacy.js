@@ -6,6 +6,7 @@ const { pool } = require('../../modules/mysql-init')
 router.post('/:idx', async (req, res, next) => {
 	try {
 		const { title, writer, content, idx } = req.body
+		
 		const sql = 'UPDATE books SET title=?, writer=?, content=? WHERE idx=?'
 		const values = [title, writer, content, idx]
 		console.log(title, writer, content, idx)
