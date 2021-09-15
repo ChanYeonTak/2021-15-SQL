@@ -8,9 +8,9 @@ body {padding-bottom:120px;}
 
 .header-wrapper {background-color: darkslategrey; color:#f9f9f9; display: flex; align-items: center;}
 .header-wrapper h1.logo {font-size:1.25em; padding: .75em}
-.header-wrapper .navi-wrapper {display:flex; margin-left:auto;}
-.header-wrapper .navi-wrapper .navi {padding: 1em 1.5em;}
-.header-wrapper .navi-wrapper .navi:hover {background-color: mistyrose; color: #111;}
+.header-wrapper .navi-wrap {display:flex; margin-left:auto;}
+.header-wrapper .navi-wrap .navi {padding: 1em 1.5em;}
+.header-wrapper .navi-wrap .navi:hover {background-color: mistyrose; color: #111;}
 
 .header-wrapper a:link {text-decoration:none; color:inherit;}
 .header-wrapper a:visited {text-decoration:none; color:inherit;}

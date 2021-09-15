@@ -42,7 +42,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 		res.status(200).render('book/list', { js, css, books, pager })
 	}
 	catch(err) {
-		next(error(err))
+		next(createError(err))
 	}
 })
 

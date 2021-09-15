@@ -2,7 +2,7 @@ const createError = require('http-errors')
 const path = require('path')
 const fs = require('fs-extra')
 
-const error = (code, msg) => {
+const error = (code) => {
 	let message = '서버 에러입니다. 관리자에게 문의하세요.'
 	switch(code) {
 		case 400:
@@ -21,9 +21,16 @@ const error = (code, msg) => {
 			message = '서버 내부 에러입니다. 잠시후 다시 시도해 주세요.'
 			break;
 		default:
+			if(code.sqlMessage) {
+				message = code.sqlMessage + ':::::'
+				message = 'CODE : '+ code.code + '\n'
+				message += 'ERRNO : '+ code.errno + '\n'
+				message += 'SQL' + code.sql + '\n' 
+				message += 'STATE' + code.sqlState + '\n'   
+			}
 			break;
 	}
-	return createError(code || 500, message + '^^' + msg)
+	return createError(code, msg || message)
 }
 
 const location = src => path.join(__dirname, '../', src)
