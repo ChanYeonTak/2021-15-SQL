@@ -9,7 +9,7 @@ module.exports = _lang => {
       GLOBAL : {
         TAB_TITLE    : '도서 관리 게시판',
         LOGO         : '도서 관리 시스템',
-        NAVI         : [ '도서 등록', '도서 리스트' ],
+        NAVI         : [ '도서 등록', '도서 리스트', '로그인', '로그아웃', '회원가입' ],
         MSG: {
           DELETE     : '정말로 삭제하시겠습니까?'
         }
@@ -60,7 +60,7 @@ module.exports = _lang => {
           GLOBAL : {
             TAB_TITLE    : 'BOOK BOARD',
             LOGO         : 'BOOK MANAGEMENT SYSTEM',
-            NAVI         : [ 'BOOK REG', 'BOOK LIST' ]
+            NAVI         : [ 'BOOK REG', 'BOOK LIST', 'LOGIN', 'LOGOUT', 'JOIN US' ]
           },
           LIST: {
             TITLE        : 'BOOK LIST',
