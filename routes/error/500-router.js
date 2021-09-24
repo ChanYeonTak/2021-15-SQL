@@ -23,7 +23,7 @@ module.exports = (error, req, res, next) => {
 				err.desc = '경로를 찾을 수 없습니다.'
 				break;
 			case 500:
-				merr.desc = '서버 내부 에러입니다. 잠시후 다시 시도해 주세요.'
+				err.desc = '서버 내부 에러입니다. 잠시후 다시 시도해 주세요.'
 				break;
 		}
 	}
