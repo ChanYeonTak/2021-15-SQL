@@ -14,13 +14,14 @@ require('./modules/server-init')(app, process.env.PORT)
 app.set('view engine', 'ejs')
 app.set('views', './views')
 app.locals.pretty = true
-app.locals.tabTitle = '도서 검색 게시판'
+app.locals.tabTitle = 'Express 게시판'
 
 
 /*************** middleware ***************/
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(methodInit()) // method-override
+app.use(methodInit())	// method-override
+
 
 /*************** static init **************/
 app.use('/', express.static(path.join(__dirname, 'public')))
@@ -32,14 +33,15 @@ const langMW = require('./middlewares/lang-mw')
 const bookRouter = require('./routes/book')
 const apiBookRouter = require('./routes/api/book')
 const authRouter = require('./routes/auth')
-const apiAuthRouter = require('./routes/auth')
-
+const apiAuthRouter = require('./routes/api/auth')
 
 app.use(langMW)
 app.use('/book', bookRouter)
 app.use('/api/book', apiBookRouter)
 app.use('/auth', authRouter)
 app.use('/api/auth', apiAuthRouter)
+
+
 
 /**************** error init **************/
 const _404Router = require('./routes/error/404-router')

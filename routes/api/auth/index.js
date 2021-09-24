@@ -7,4 +7,4 @@ const verifyRouter = require('./verify-router')
 
 router.use('/', verifyRouter)
 
-module.exports = router
+module.exports = router;
