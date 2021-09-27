@@ -5,9 +5,12 @@ const { error } = require('../../modules/util')
 const { pool } = require('../../modules/mysql-init')
 const { findUser } = require('../../models/auth')
 
-router.get('/', async (req, res, next) => {
-	await findUser ('id', 1)
-	res.send('error')
+router.get('/', (req, res, next) => {
+	// 실제 login 창 보여주기 / 세션과 쿠키 개념
+	req.app.locals.PAGE = 'LOGIN'
+	req.app.locals.js = 'auth/login'
+	req.app.locals.css = 'auth/login'
+	res.render ('auth/login')
 })
 
 router.post('/', (req, res, next) => {

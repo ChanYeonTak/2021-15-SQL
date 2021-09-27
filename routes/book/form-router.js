@@ -7,12 +7,9 @@ const { NO_EXIST } = require('../../modules/lang-init')
 
 router.get('/', (req, res, next) => {
 	req.app.locals.PAGE = 'CREATE'
-	const title = '도서 등록'
-	const description = '등록할 도서를 아래에서 입력하세요.'
-	const js = 'book/form'
-	const css = 'book/form'
-	const book = null
-	res.status(200).render('book/form', { title, description, js, css, book })
+	req.app.locals.js = 'book/form'
+	req.app.locals.css= 'book/form'
+	res.status(200).render('book/form')
 })
 
 router.get('/:idx', async (req, res, next) => {
@@ -32,11 +29,9 @@ router.get('/:idx', async (req, res, next) => {
 		const [[book]] = await pool.execute(sql, values)
 
 		if(book) {
-			const js = 'book/form'
-			const css = 'book/form'
 			book.cover = book.ori ? { ori: book.ori, path: relPath(book.name), idx: book.fid } : null
 			book.upfile = book.ori2 ? { ori: book.ori2, idx: book.fid2 } : null
-			res.status(200).render('book/form', { css, js, book })
+			res.status(200).render('book/form', { book })
 		}
 		else  next(createError(400, NO_EXIST))
 	}
