@@ -1,12 +1,14 @@
 /************* global require *************/
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
 const path = require('path')
 const methodInit = require('./modules/method-init')
-
+const logger = require('./middlewares/morgan-mw')
+const session = require('./middlewares/session-mw')
 
 /*************** server init **************/
-require('dotenv').config()
 require('./modules/server-init')(app, process.env.PORT)
 
 
@@ -14,13 +16,14 @@ require('./modules/server-init')(app, process.env.PORT)
 app.set('view engine', 'ejs')
 app.set('views', './views')
 app.locals.pretty = true
-app.locals.tabTitle = 'Express 게시판'
+app.locals.tabTitle = '도서 게시판'
 
 
 /*************** middleware ***************/
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(methodInit())	// method-override
+app.use(session(app))
 
 
 /*************** static init **************/

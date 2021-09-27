@@ -8,12 +8,16 @@ const { NO_EXIST } = require('../../modules/lang-init')
 router.get('/', (req, res, next) => {
 	req.app.locals.PAGE = 'CREATE'
 	req.app.locals.js = 'book/form'
-	req.app.locals.css= 'book/form'
+	req.app.locals.css = 'book/form'
+	req.app.locals.book = null
 	res.status(200).render('book/form')
 })
 
 router.get('/:idx', async (req, res, next) => {
 	req.app.locals.PAGE = 'UPDATE'
+	req.app.locals.js = 'book/form'
+	req.app.locals.css = 'book/form'
+	
 	try {
 		const sql = `
 		SELECT B.*, 
@@ -24,7 +28,6 @@ router.get('/:idx', async (req, res, next) => {
 		LEFT JOIN files F2 ON B.idx = F2.fidx AND F2.fieldname = 'U' AND F2.status > '0'
 		WHERE B.idx=?`
 
-		
 		const values = [req.params.idx]
 		const [[book]] = await pool.execute(sql, values)
 
@@ -33,7 +36,7 @@ router.get('/:idx', async (req, res, next) => {
 			book.upfile = book.ori2 ? { ori: book.ori2, idx: book.fid2 } : null
 			res.status(200).render('book/form', { book })
 		}
-		else  next(createError(400, NO_EXIST))
+		else next(createError(400, NO_EXIST))
 	}
 	catch(err) {
 		next(createError(err))
