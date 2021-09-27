@@ -56,7 +56,7 @@ const loginUser = async ({ userid, passwd }) => {
     else return { success : false, user:null, msg: '아이디가 일치하지 않습니다.' }
   }
   catch(err) {
-    return { success : false, err: err} 
+    return { success : false, user:null, err: err} 
   }
 }
 
