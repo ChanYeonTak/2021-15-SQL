@@ -4,8 +4,9 @@ const router = express.Router()
 const createError = require('http-errors')
 const { alert, alert2 } = require('../../modules/util')
 const { loginUser } = require('../../models/auth')
+const { isUser, isGuest } = require('../../middlewares/auth-mw')
 
-router.get('/', (req, res, next) => {
+router.get('/', isGuest, (req, res, next) => {
 	// 실제 login 창 보여주기 / 세션과 쿠키 개념
 	req.app.locals.PAGE = 'LOGIN'
 	req.app.locals.js = 'auth/login'
@@ -13,7 +14,7 @@ router.get('/', (req, res, next) => {
 	res.render ('auth/login')
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isGuest, async (req, res, next) => {
 	// 실제 login 로직
 	try {
 		const r = await loginUser(req.body)
