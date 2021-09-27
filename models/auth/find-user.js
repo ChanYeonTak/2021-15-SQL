@@ -44,4 +44,8 @@ const isVerify = async (key, value) => {
 	return rs.length ? true : false
 }
 
-module.exports = { findUser, findAllUser, isVerify }
+const loginUser = async (user) => {
+
+}
+
+module.exports = { findUser, findAllUser, isVerify, loginUser }
