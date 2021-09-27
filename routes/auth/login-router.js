@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
-const { pool } = require('../../modules/mysql-init')
+const { alert, alert2 } = require('../../modules/util')
 const { loginUser } = require('../../models/auth')
 
 router.get('/', (req, res, next) => {
@@ -17,8 +17,13 @@ router.post('/', async (req, res, next) => {
 	// 실제 login 로직
 	try {
 		const r = await loginUser(req.body)
-		res.json(r)
-	}
+		if (r.success) {
+			let { idx, userid, username, email, status } = r.user
+			req.session.user = { idx, userid, username, email, status } 
+			res.send(alert(r.msg))
+			}
+			else res.send(alert2(r.msg))
+		}
 	catch(err) {
 		next(createError(err))
 	}

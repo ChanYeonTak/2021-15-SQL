@@ -51,8 +51,15 @@ const isImg = file => imgExt.includes(path.extname(file).substr(1)) ? true : fal
 const alert = (msg, loc = '/') => {
 	return `<script>
 		alert('${msg}');
-		location.href='${loc};'
+		location.href='${loc}';
 	</script>`
 }
 
-module.exports = { location, cutTail, chgStatus, exts, relPath, absPath, getIcon, isImg, moveFile, alert }
+const alert2 = (msg, loc = '/') => {
+	return `<script>
+		alert('${msg}');
+		location.href='http://127.0.0.1:3000/ko/auth/login';
+	</script>`
+}
+
+module.exports = { location, cutTail, chgStatus, exts, relPath, absPath, getIcon, isImg, moveFile, alert, alert2 }
