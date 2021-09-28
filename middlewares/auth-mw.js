@@ -2,12 +2,12 @@ const { pool } = require('../modules/mysql-init')
 const { alert } = require('../modules/util')
 
 const isUser = (req, res, next) => {
-	if(req.session.user) next()
+	if(req.user) next()
 	else res.send(alert('로그인 후 이용 바랍니다.')) 
 }
 
 const isGuest = (req, res, next) => {
-	if(req.session.user) res.send(alert('회원은 이용할 수 없습니다.'))
+	if(req.user) res.send(alert('회원은 이용할 수 없습니다.'))
 	else next()
 }
 
@@ -15,7 +15,7 @@ const isMyBook = (name, mode) => {
 	return async (req, res, next) => { 
 		let sql 
 		const { idx, _method } = eval(`req.${name}`)
-		const fidx = req.session.user.idx
+		const fidx = req.user.idx
 		if(mode === 'U' && _method !== 'PUT') next()
 		else {
 		sql = " SELECT * FROM books WHERE idx=? AND fidx=? "
