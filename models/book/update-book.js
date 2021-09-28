@@ -14,6 +14,5 @@ const updateBook = async book => {
     }
   }
   
-}
 
 module.exports = { updateBook }
