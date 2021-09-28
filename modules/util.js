@@ -62,4 +62,15 @@ const alert2 = (msg, loc = '/') => {
 	</script>`
 }
 
-module.exports = { location, cutTail, chgStatus, exts, relPath, absPath, getIcon, isImg, moveFile, alert, alert2 }
+module.exports = { 
+	location, 
+	cutTail, 
+	chgStatus, 
+	exts, 
+	relPath, 
+	absPath, 
+	getIcon, 
+	isImg, 
+	moveFile, 
+	alert, 
+	alert2 }

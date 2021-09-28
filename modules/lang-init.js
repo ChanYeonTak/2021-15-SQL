@@ -23,8 +23,8 @@ module.exports = _lang => {
 					}
 				},
 				GLOBAL: {
-					LOGO					: '도서관리시스템',
-					TAB_TITLE			: 'Express 게시판',
+					LOGO					: '도서관리 시스템',
+					TAB_TITLE			: '도서관리 게시판',
 					NAVI					: ['도서 등록', '도서 리스트', '로그인', '로그아웃', '회원가입']
 				},
 				LIST: {
