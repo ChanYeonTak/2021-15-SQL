@@ -4,6 +4,9 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const path = require('path')
+const passport = require('passport')
+const passportModule = require('./passport')
+
 const method = require('./middlewares/method-mw')
 const logger = require('./middlewares/morgan-mw')
 const session = require('./middlewares/session-mw')
@@ -25,7 +28,16 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(method())	// method-override
 app.use(session(app))
+
+/*************** passport ****************/
+passportModule(passport)
+app.use(passport.initialize())
+app.use(passport.session())
+
+
+/*************** locals ****************/
 app.use(locals)
+
 
 
 /*************** static init **************/
@@ -55,6 +67,7 @@ app.use('/api/auth', apiAuthRouter)
 /**************** error init **************/
 const _404Router = require('./routes/error/404-router')
 const _500Router = require('./routes/error/500-router')
+const { Passport } = require('passport')
 
 app.use(_404Router)
 app.use(_500Router)

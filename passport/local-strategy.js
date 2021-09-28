@@ -1,11 +1,23 @@
 const LocalStrategy = require('passport-local').Strategy
-const { pool } = requre('../modules/mysql-init')
+const { loginUser } = require('../models/auth')
 
-// LocalStrategy의 옵션
-const cb = () => { 
-
+const cb = async (userid, passwd, done) => { 
+  try {
+    const { success, user } = await loginUser(userid, passwd)
+    if (success) done(null, user)
+    else done(null, false, '아이디와 패스워드를 확인하세요')
+  }
+  catch {
+    done(err)
+  }
 }
 
-const localStrategy = new LocalStrategy({}, cb)
+const fields = { 
+  usernameField: 'userid', 
+  passwordField: 'passwd'
+}
+
+// LocalStrategy의 옵션
+const localStrategy = new LocalStrategy(fields, cb)
 
 module.exports = (passport) => passport.use(localStrategy)
