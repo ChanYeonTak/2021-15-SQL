@@ -6,7 +6,7 @@ const { pool } = require('../../modules/mysql-init')
 const uploader = require('../../middlewares/multer-book-mw')
 const { isUser, isGuest, isMyBook } = require('../../middlewares/auth-mw')
 const { updateBook, createBook } = require('../../models/book')
-const { findBookFiles, updateFile, createFile } = require('../../models/file')
+const { findBookFile, updateFile, createFile } = require('../../models/file')
 
 
 router.post('/', isUser, uploader.fields([{name: 'cover'}, {name: 'upfile'}]), isMyBook('body', 'U'), async (req, res, next) => {
@@ -20,10 +20,10 @@ router.post('/', isUser, uploader.fields([{name: 'cover'}, {name: 'upfile'}]), i
 			for(let [k, [v]] of Object.entries(req.files)) {
 				fieldname = k.substr(0, 1).toUpperCase()
 				if(isUpdate) { // 기존파일 처리
-					let { files } = await findBookFiles({ fidx: bookIdx, fieldname, status: '1' })
-					if(files.length > 0) {
-						await updateFile(files[0].idx, [['status', '0']])
-						await moveFile(files[0].savename)
+					let { file } = await findBookFile({ fidx: bookIdx, fieldname, status: '1' })
+					if(file) {
+						await updateFile(file.idx, [['status', '0']])
+						await moveFile(file.savename)
 					}
 				}
 				await createFile({

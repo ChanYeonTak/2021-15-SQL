@@ -11,24 +11,29 @@ const findAllFiles = async (order = 'ASC') => {
 	}
 }
 
-const findBookFiles = async (opt) => {
+const findBookFile = async (opt) => {
 	try {
-		if(typeof opt === 'object') {
 			let { fidx, fieldname, status } = opt
 			let sql = " SELECT idx, savename FROM files WHERE fidx=? AND fieldname=? AND status=? "
-			const [files] = await pool.execute(sql, [fidx, fieldname, status])
-			return { success: true, files }
+			const [[file]] = await pool.execute(sql, [fidx, fieldname, status])
+			return { success: true, file }
 		}
-		else {
-			let sql = " SELECT * FROM files WHERE fidx = ? "
-			const [files] = await pool.execute(sql, [opt])
-			return { success: true, files }
-		}
-	}
 	catch(err) {
 		return { success: false, err }
 	}
 }
+
+const findBookFiles = async (idx) => {
+	try {
+			let sql = " SELECT * FROM files WHERE fidx = ? "
+			const [files] = await pool.execute(sql, [idx])
+			return { success: true, files }
+		}
+	catch(err) {
+		return { success: false, err }
+	}
+}
+
 
 const findFile = async (idx) => {
 	try {
@@ -43,4 +48,4 @@ const findFile = async (idx) => {
 
 
 
-module.exports = { findFile, findBookFiles, findAllFiles } 
+module.exports = { findFile, findBookFile, findBookFiles, findAllFiles } 
