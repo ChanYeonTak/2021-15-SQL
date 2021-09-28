@@ -9,27 +9,31 @@ const { updateBook, createBook } = require('../../models/book')
 const { findBookFiles, updateFile, createFile } = require('../../models/file')
 
 
-// 멀터를 거쳐야 req.body를 생성함
 router.post('/', isUser, uploader.fields([{name: 'cover'}, {name: 'upfile'}]), isMyBook('body', 'U'), async (req, res, next) => {
 	try {
-		let book = { ...req.body, fidx: req.session.user.idx } // fidx = user의 idx
-		let isUpdate = book._method === 'PUT' && book.idx 
-		const { idx:bookIdx } = isUpdate
-			? await createBook(book) 
-			: await updateBook(book)
-	
+		let book = { ...req.body, fidx: req.session.user.idx }
+		let isUpdate = book._method === 'PUT' && book.idx
+		const { idx: bookIdx } = isUpdate ? await updateBook(book) : await createBook(book)
+		
 		if(req.files) {
 			let fieldname;
 			for(let [k, [v]] of Object.entries(req.files)) {
 				fieldname = k.substr(0, 1).toUpperCase()
-				if(isUpdate) { // 기존 파일 처리
-					let [ fileData ] = await findBookFiles( { fidx : bookIdx, fieldname, status : '1'})
-					if(fileData.length > 0) {
-						await updateFile(fileData.idx, [['status', '0']])
-						await moveFile(fileData.savename)
+				if(isUpdate) { // 기존파일 처리
+					let { files } = await findBookFiles({ fidx: bookIdx, fieldname, status: '1' })
+					if(files.length > 0) {
+						await updateFile(files[0].idx, [['status', '0']])
+						await moveFile(files[0].savename)
 					}
 				}
-				await createFile( {...v, fieldname, bookIdx } )
+				await createFile({
+					oriname: v.originalname,
+					savename: v.filename,
+					mimetype: v.mimetype,
+					size: v.size,
+					fieldname, 
+					fidx: bookIdx 
+				})
 			}
 			res.redirect(`/${req.lang}/book`)
 		}
