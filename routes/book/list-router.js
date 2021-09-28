@@ -12,7 +12,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 	req.app.locals.js = 'book/list'
 	req.app.locals.css = 'book/list'
 	try {
-		const { count:totalRecord } = findBookCount()
+		const { count:totalRecord } = await findBookCount()
 		const page = Number(req.params.page || 1)
 		const pager = createPager(page, totalRecord, 5, 3)
 		const { books } = await findBooks( pager.startIdx.toString(), pager.listCnt.toString() )
@@ -29,6 +29,7 @@ router.get(['/', '/:page'], async (req, res, next) => {
 		
 		// console.timeEnd('start')
 		res.status(200).render('book/list', { books, pager })
+		
 	}
 	catch(err) {
 		next(createError(err))
