@@ -8,8 +8,8 @@ const { NO_EXIST } = require('../../modules/lang-init')
 
 router.get('/:idx', async (req, res, next) => {
 	req.app.locals.PAGE = 'VIEW'
-	req.app.locals.js = 'book/view'
 	req.app.locals.css = 'book/view'
+	req.app.locals.js = 'book/view'
 	let sql, values
 	try {
 		sql = `
@@ -20,6 +20,7 @@ router.get('/:idx', async (req, res, next) => {
 		LEFT JOIN files F ON B.idx = F.fidx AND F.fieldname = 'C' AND F.status > '0'
 		LEFT JOIN files F2 ON B.idx = F2.fidx AND F2.fieldname = 'U' AND F2.status > '0'
 		WHERE B.status > '0' AND B.idx=?`
+
 		values = [req.params.idx]
 		const [[book]] = await pool.execute(sql, values)
 		if(book) {
@@ -29,8 +30,8 @@ router.get('/:idx', async (req, res, next) => {
 			book.cover = book.savename ? relPath(book.savename) : null
 			book.upfile = book.savename2 ? relPath(book.savename2) : null
 			book.isImg = isImg(book.savename2 || '')
-
 			res.status(200).render('book/view', { book })
+
 		}
 		else next(createError(400, NO_EXIST))
 	}

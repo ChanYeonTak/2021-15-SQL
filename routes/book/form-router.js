@@ -4,25 +4,20 @@ const createError = require('http-errors')
 const { relPath, alert } = require('../../modules/util')
 const { pool } = require('../../modules/mysql-init')
 const { NO_EXIST } = require('../../modules/lang-init')
-const { isUser, isGuest } = require('../../middlewares/auth-mw')
+const { isUser, isGuest, isMyBook } = require('../../middlewares/auth-mw')
 
-// 보내기 전에 미들웨어에서 처리
 router.get('/', isUser, (req, res, next) => {
-///	if(req.session.user) {
 	req.app.locals.PAGE = 'CREATE'
 	req.app.locals.js = 'book/form'
 	req.app.locals.css = 'book/form'
 	req.app.locals.book = null
 	res.status(200).render('book/form')
-//	}
-//	else res.send(alert('로그인 후 이용 바랍니다.')) 라우터 별로 세션 여부에 따라 확인하지만..
 })
 
-router.get('/:idx', isUser, async (req, res, next) => {
+router.get('/:idx', isUser, isMyBook('params'), async (req, res, next) => {
 	req.app.locals.PAGE = 'UPDATE'
 	req.app.locals.js = 'book/form'
 	req.app.locals.css = 'book/form'
-	
 	try {
 		const sql = `
 		SELECT B.*, 

@@ -2,29 +2,29 @@ const path = require('path')
 const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
-const { alert, alert2 } = require('../../modules/util')
+const { alert } = require('../../modules/util')
 const { loginUser } = require('../../models/auth')
-const { isUser, isGuest } = require('../../middlewares/auth-mw')
+const { isGuest, isUser } = require('../../middlewares/auth-mw')
 
 router.get('/', isGuest, (req, res, next) => {
-	// 실제 login 창 보여주기 / 세션과 쿠키 개념
+	// login 창 보여주기
 	req.app.locals.PAGE = 'LOGIN'
 	req.app.locals.js = 'auth/login'
 	req.app.locals.css = 'auth/login'
-	res.render ('auth/login')
+	res.render('auth/login')
 })
 
 router.post('/', isGuest, async (req, res, next) => {
 	// 실제 login 로직
 	try {
 		const r = await loginUser(req.body)
-		if (r.success) {
+		if(r.success) {
 			let { idx, userid, username, email, status } = r.user
-			req.session.user = { idx, userid, username, email, status } 
+			req.session.user = { idx, userid, username, email, status }
 			res.send(alert(r.msg))
-			}
-			else res.send(alert2(r.msg))
 		}
+		else res.send(alert(r.msg))
+	}
 	catch(err) {
 		next(createError(err))
 	}
