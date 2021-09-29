@@ -27,7 +27,7 @@ router.post('/', isGuest, async (req, res, next) => {
 			})
 		}
 	}
-	passport.authenticate('local', done)(req, res, next)
+	passport.authenticate('local', done)(req, res, next) // local-strategy 의 done 함수를 가져옴
 })
 
 module.exports = router

@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy
 const { loginUser } = require('../models/auth')
 
+// cb 실행 구간 -> auth/login-router
 const cb = async (userid, passwd, done) => { 
   try {
     const { success, user } = await loginUser( userid, passwd )
@@ -12,6 +13,7 @@ const cb = async (userid, passwd, done) => {
   }
 }
 
+// 로그인할 때 옵션들 부여하는 구간
 const fields = { 
   usernameField: 'userid', 
   passwordField: 'passwd'

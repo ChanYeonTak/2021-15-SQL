@@ -17,9 +17,9 @@ const deserialize = async (idx, done) => {
 }
 
 module.exports = passport => {
-  passport.serializeUser(serialize) 
-  passport.deserializeUser(deserialize)
-  local(passport)
+  passport.serializeUser(serialize) // req.user -> idx (cookie -> session)
+  passport.deserializeUser(deserialize) // req.user <- DB에서 user 정보를 가져옴 (session에 DB 정보)
+  local(passport) // login이 안되어있으면 로컬로 돎
   // kakao(passport)
   // naver(passport)
   // facebook(passport)
