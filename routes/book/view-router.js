@@ -4,6 +4,8 @@ const moment = require('moment')
 const createError = require('http-errors')
 const { chgStatus, relPath, isImg } = require('../../modules/util')
 const { findBook } = require('../../models/book')
+const { isMyBook } = require('../../middlewares/auth-mw')
+
 const { NO_EXIST } = require('../../modules/lang-init')
 
 router.get('/:idx', async (req, res, next) => {
