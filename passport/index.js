@@ -7,10 +7,9 @@
   다. local 은 done() 
   라. kakao/naver 는 passport-kakao(naver)가 done을 내장하고 있으므로, 미들웨어로만 진행
 */
-
-
 const local = require('./local-strategy')
 const kakao = require('./kakao-strategy')
+const naver = require('./naver-strategy')
 const { findUser } = require('../models/auth')
 
 const serialize = (user, done) => { 
@@ -33,6 +32,6 @@ module.exports = passport => {
   passport.deserializeUser(deserialize) // req.user <- DB에서 user 정보를 가져옴 (session에 DB 정보)
   local(passport) // login이 안되어있으면 로컬로 돎
   kakao(passport)
-  // naver(passport)
+  naver(passport)
   // facebook(passport)
 }
