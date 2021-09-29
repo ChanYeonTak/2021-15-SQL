@@ -1,4 +1,5 @@
 const local = require('./local-strategy')
+const kakao = require('./kakao-strategy')
 const { findUser } = require('../models/auth')
 
 const serialize = (user, done) => { 
@@ -20,7 +21,7 @@ module.exports = passport => {
   passport.serializeUser(serialize) // req.user -> idx (cookie -> session)
   passport.deserializeUser(deserialize) // req.user <- DB에서 user 정보를 가져옴 (session에 DB 정보)
   local(passport) // login이 안되어있으면 로컬로 돎
-  // kakao(passport)
+  kakao(passport)
   // naver(passport)
   // facebook(passport)
 }
