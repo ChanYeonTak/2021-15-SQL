@@ -3,7 +3,6 @@ const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
 const passport = require('passport')
-
 const { alert } = require('../../modules/util')
 const { loginUser } = require('../../models/auth')
 const { isGuest, isUser } = require('../../middlewares/auth-mw')
