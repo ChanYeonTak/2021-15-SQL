@@ -10,17 +10,17 @@
 		<table>
 			<tbody>
 				<!-- 아이디 -->
-				<tr>
-					<td class="title"><%= MYPAGE.USERID %></td>
-					<td class="content">
-						<input type="text" name="userid" value="<%= userid %>" class="form-control" readonly>
-					</td>
-				</tr>
 				<% if(provider) { %>
 				<tr>
 					<td colspan="2"><%= (provider === 'KA' ) ? MYPAGE.KAKAO : MYPAGE.NAVER %> </td>
 				</tr>
 				<% } else { %> 
+					<tr>
+						<td class="title"><%= MYPAGE.USERID %></td>
+						<td class="content">
+							<input type="text" name="userid" value="<%= userid %>" class="form-control" readonly>
+						</td>
+					</tr>	
 				<!-- 패스워드 -->
 				<tr>
 					<td class="title require"><%= MYPAGE.PASSWD %></td>
