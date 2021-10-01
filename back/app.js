@@ -49,14 +49,15 @@ app.use(logger)
 const bookRouter = require('./routes/book')
 const apiBookRouter = require('./routes/api/book')
 const authRouter = require('./routes/auth')
-const apiAuthRouter = require('./routes/api/auth')
+const apiAuthRouter = require('./routes/api/auth') // 내부에서 일어나는 AJAX 통신
+const mypageRouter = require('./routes/mypage')
 
 app.use(langMW)
 app.use('/book', bookRouter)
 app.use('/api/book', apiBookRouter)
 app.use('/auth', authRouter)
 app.use('/api/auth', apiAuthRouter)
-
+app.use('/mypage', mypageRouter)
 
 
 /**************** error init **************/
