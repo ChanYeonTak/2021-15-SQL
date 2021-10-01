@@ -16,6 +16,11 @@
 						<input type="text" name="userid" value="<%= userid %>" class="form-control" readonly>
 					</td>
 				</tr>
+				<% if(provider) { %>
+				<tr>
+					<td colspan="2"><%= (provider === 'KA' ) ? MYPAGE.KAKAO : MYPAGE.NAVER %> </td>
+				</tr>
+				<% } else { %> 
 				<!-- 패스워드 -->
 				<tr>
 					<td class="title require"><%= MYPAGE.PASSWD %></td>
@@ -32,6 +37,7 @@
 						<div class="valid passwd2"></div>
 					</td>
 				</tr>
+				<% } %>
 				<!-- 사용자 이름 -->
 				<tr>
 					<td class="title require"><%= MYPAGE.USERNAME %></td>
