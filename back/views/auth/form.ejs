@@ -7,7 +7,6 @@
 <div class="form-wrapper wrapper">
 	<%- include('../inc/title-bar') %> 
 	<form action="/<%= LANG %>/auth/form" method="POST" name="saveForm">
-		<input type="hidden" name="idx" value="<%= idx %>">
 		<table>
 			<tbody>
 				<!-- 아이디 -->
@@ -74,7 +73,7 @@
 		PW_TAKEN		: "<%= ERROR.JOIN.PW_TAKEN %>",
 		NAME_NULL		: "<%= ERROR.JOIN.NAME_NULL %>",
 		EMAIL_NULL	: "<%= ERROR.JOIN.EMAIL_NULL %>",
-		EMAIL_VALID		: "<%= ERROR.JOIN.EMAIL_VALID %>",
+		EMAIL_VALID	: "<%= ERROR.JOIN.EMAIL_VALID %>",
 		EMAIL_TAKEN	: "<%= ERROR.JOIN.EMAIL_TAKEN %>",
 	};
 </script>
