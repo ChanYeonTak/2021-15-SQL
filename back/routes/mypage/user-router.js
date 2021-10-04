@@ -4,7 +4,7 @@ const router = express.Router()
 const createError = require('http-errors')
 const { alert } = require('../../modules/util')
 const { isUser } = require('../../middlewares/auth-mw')
-const { findUser, updateUser } = require('../../models/auth')
+const { findUser, updateUser, updateDomain } = require('../../models/auth')
 
 // 내 회원 정보 GET: /mypage/user
 router.get('/', isUser, async (req, res, next) => {
@@ -23,12 +23,12 @@ router.get('/', isUser, async (req, res, next) => {
 })
 
 // 회원정보 수정 POST: /mypage/user
-router.post('/', async (req, res, next) => {
+router.post('/', isUser, async (req, res, next) => {
 	try {
     const { ERROR } = req.app.locals
     const r = await updateUser (req.body)
     if (r) res.send(alert('User Updated', '/mypage/user'))
-    else res.send(alert(ERROR.SQL_ERROR))
+    else res.send(alert(ERROR.SQL_ERROR, '/'))
     }
     catch(err) {
       next(createError(err))
@@ -36,9 +36,17 @@ router.post('/', async (req, res, next) => {
 })
 
 // apikey 발행 POST: /mypage/user/api
-router.post('/api', async (req, res, next) => {
+router.post('/api', isUser, async (req, res, next) => {
+  try {
+    const { ERROR } = req.app.locals
+    const r = await updateDomain(req.body.domain, req.user.idx)
+    if(r) res.send(alert('Success', '/mypage/user'))
+    else res.send(alert(ERROR.SQL_ERROR, '/'))
+   } 
+  catch {
+    next(createError(err))
+  }
 
-  
 })
 
 module.exports = router
