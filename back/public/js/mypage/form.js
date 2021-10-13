@@ -168,8 +168,8 @@ function verifyTrue(el, elTxt, msg) {
 
 
 function onApikey() {
-	var idx = f2.idx.value;
-	axios.get('/api/mypage/key/')
+	if(confirm('APIKey를 적용하면 바로 적용됩니다.\n적용 후에는 되돌릴 수 없습니다.'))
+	{ axios.get('/api/mypage/key/')
 	.then(function(r) {
 		if(r.data.code === 200) apikeyEl.value = r.data.apikey;
 		else console.log(r);
@@ -177,6 +177,7 @@ function onApikey() {
 	.catch(function(err) {
 		console.log(err);
 	})
+}
 }
 
 function onApiSubmit(e) {

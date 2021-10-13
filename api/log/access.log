@@ -1,0 +1,2 @@
+::ffff:127.0.0.1 - - [13/Oct/2021:05:49:22 +0000] "GET / HTTP/1.1" 404 80 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
+::ffff:127.0.0.1 - - [13/Oct/2021:05:49:23 +0000] "GET /favicon.ico HTTP/1.1" 404 80 "http://127.0.0.1:3100/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"

@@ -29,7 +29,7 @@
   },
   "name": "2021-15-sql",
   "version": "1.0.0",
-  "main": "02.book.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon app",
     "api": "nodemon api",
