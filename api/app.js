@@ -1,11 +1,7 @@
 /************* global require *************/
 require('dotenv').config()
-
 const express = require('express')
 const app = express()
-const path = require('path')
-
-const logger = require('./middlewares/morgan-mw')
 
 
 /*************** server init **************/
@@ -16,10 +12,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 /*************** logger init **************/
+const logger = require('./middlewares/morgan-mw')
 app.use(logger)
 
 /**************** router init **************/
+const bookRouter = require('./routes/book')
 
+app.use('/book', bookRouter)
 
 /**************** error init **************/
 const _404Router = require('./routes/error/404-router')
