@@ -6,7 +6,7 @@ module.exports = _lang => {
 				ERROR: {
 					NOT_FOUND 		: '존재하지 않는 데이터 입니다.',
 					SQL_ERROR  		: '데이터 처리 실패',
-					AUTH_ERROR  		: '권한 없음',
+					AUTH_ERROR  	: '권한 없음',
 					JOIN: {
 						ID_NULL			: '아이디를 입력하세요.',
 						ID_LEN			: '아이디는 6자 이상 24자 이하 입니다.',
@@ -22,6 +22,7 @@ module.exports = _lang => {
 						EMAIL_NULL	: '이메일을 입력하세요.',
 						EMAIL_VALID	: '이메일 형식이 올바르지 않습니다.',
 						EMAIL_TAKEN	: '중복된 이메일입니다. 다른 이메일 주소를 입력해주세요',
+						MSG_NULL  	: '탈퇴 사유를 작성해 주세요.',
 					}
 				},
 				GLOBAL: {
@@ -73,6 +74,7 @@ module.exports = _lang => {
 					PASSWD2				: '패스워드 확인',
 					USERNAME			: '이름',
 					EMAIL					: '이메일',
+					MSG			  		: '회원 탈퇴 사유',					
 				},
 				MYPAGE : {
 					TITLE 				: '회원 정보 수정',
@@ -124,6 +126,7 @@ module.exports = _lang => {
 						EMAIL_NULL	: 'Please enter your email',
 						EMAIL_VALID	: 'Email format is incorrect',
 						EMAIL_TAKEN	: 'You can not use this Email. Please use a diffrent Email',
+						MSG_NULL  	: 'Please write reason for withdrawal',
 					}
 				},
 				GLOBAL: {
@@ -175,6 +178,7 @@ module.exports = _lang => {
 					PASSWD2				: 'Password confirm',
 					USERNAME			: 'User name',
 					EMAIL					: 'Email',
+					MSG			  		: 'Reason for withdrawal',					
 				},
 				MYPAGE : {
 					TITLE 				:	'Book User Register Edit',
