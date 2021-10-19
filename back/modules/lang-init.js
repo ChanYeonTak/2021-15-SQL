@@ -102,7 +102,9 @@ module.exports = _lang => {
 					APIKEY				: '인증키 생성/변경'
 				},
 				MSG: {
-					DELETE				: '정말로 삭제하시겠습니까?'
+					DELETE				: '정말로 삭제하시겠습니까?',
+					WITHDRAWAL 		: '회원탈퇴 완료',
+					SNS_WITHDRAWAL : 'SNS 회원은 탈퇴 후 다시 로그인 하시면 재가입됩니다.'
 				}
 			}
 		case 'EN': 
@@ -206,7 +208,9 @@ module.exports = _lang => {
 					APIKEY				: 'Auth Key Create/Update'
 				},
 				MSG: {
-					DELETE				: 'Are you sure you want to delete it?'
+					DELETE				: 'Are you sure you want to delete it?',
+					WITHDRAWAL 		: 'Withdrawl Complete',
+					SNS_WITHDRAWAL : 'If you log in again after withdrawal from SNS, you will be rejoin.'
 				}
 			}
 	}

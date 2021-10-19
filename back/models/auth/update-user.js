@@ -8,7 +8,7 @@ const updateUser = async ({ idx, passwd, username, email, sql, values }) => {
 		let { BCRYPT_SALT: salt, BCRYPT_ROUND: round } = process.env
 		let { user } = await findUser('idx', idx)
 		if(!username || !email || user.status < 3) {
-			throw new Error('UPDATE ERROR')
+			throw new Error('ERROR')
 		}
 		else if(user.status < 5) {
 			sql = " UPDATE users SET username=?, email=? WHERE idx=?"
@@ -20,11 +20,26 @@ const updateUser = async ({ idx, passwd, username, email, sql, values }) => {
 			values = [hashPasswd, username, email, idx]
 		}
 		let [rs] = await pool.execute(sql, values)
-		return rs.affectedRows === 1 
+		return rs.affectedRows === 1
 	}
 	catch(err) {
 		throw new Error(err)
 	}
 }
 
-module.exports = { updateUser }
+/* 
+obj = { 필드명: 값, 필드명2: 값 ... }
+keys = { 키: 값 } 기준
+*/
+const changeUser = async (obj, key, tblName = 'users') => {
+	sql  = ` UPDATE ${tblName} SET `
+	for(let v of Object.entries(obj)) sql += ` ${v[0]}='${v[1]}',`
+	sql = sql.substr(0, sql.length - 1)
+	sql += ` WHERE ${Object.keys(key)[0]}=? `
+	const [r] = await pool.execute(sql, [Object.values(key)[0]])
+	return (r.affectedRows)
+		? { success: true }
+		: { success: false }
+}
+
+module.exports = { updateUser, changeUser }

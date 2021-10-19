@@ -4,4 +4,4 @@ module.exports = {
   ...require('./update-user'),
   ...require('./update-key'),  
   ...require('./delete-user'),  
-}
+  }

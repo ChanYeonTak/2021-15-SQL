@@ -5,10 +5,12 @@ function onSubmit(f) {
     return false;    
   }
 
-  if(f.passwd.value.trim() === "") {
+  if(f.passwd) {
+    if(f.passwd && f.passwd.value.trim() === "") {
     alert(ERR.PW_NULL)    
     f.passwd.focus();
     return false;    
+    }  
   }
   return true;
 }
