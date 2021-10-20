@@ -3,21 +3,23 @@ const { createSnsUser, findUser, changeUser } = require('../models/auth')
 
 const cb = async (accessToken, refreshToken, profile, done) => {
 	try {
+		// console.log('==================')
+		// console.log(accessToken)
+		// console.log(refreshToken)
+		// console.log(profile)
+		// console.log('==================')
 		let user = { userid: profile.id, accessToken }
-		let userSns = {
-			accessToken, 
-			refreshToken, 
-			provider: 'NA', 
-			snsid: profile.id,
+		let userSns = { accessToken, refreshToken, provider: 'NA', snsid: profile.id, 
 			snsName: profile._json.name || null,
 			displayName: profile.displayName || null,
 			profileURL: profile._json.profile_image || null,
-			email: profile._json.email || null, 
+			email: profile._json.email || null,
 		}
-    //findSnsUser(user.userid)
+		console.log("naver login => ", user)
 		let { success, user: _user } = await findUser('userid', user.userid)
-		const { idx, status } = _user
+		console.log(success)
 		if(success) {
+			const { idx, status } = _user
 			if(status === '0') {
 				const { success } = await changeUser(
 					{ status: '3' }, 
@@ -25,18 +27,19 @@ const cb = async (accessToken, refreshToken, profile, done) => {
 					'users'
 				);
 				const { success: success2 } = await changeUser(
-					{ status: '2' }, 
+					{ status: '3' }, 
 					{'fidx': idx },  
 					'users_sns'
 				);
 				if(success && success2) user.idx = idx
 				else done('Error')
 			}
+			else user.idx = idx
 		}
-    else {
-      let { idx : id } = await createSnsUser(user, userSns)
-      user.idx = id
-    }
+		else {
+			let { idx: id } = await createSnsUser(user, userSns)
+			user.idx = id
+		}
 		done(null, user)
 	}
 	catch(err) {

@@ -18,17 +18,15 @@ router.get('/', isUser, (req, res, next) => {
 router.post('/', isUser, async (req, res, next) => {
 	// 실제 탈퇴 처리
 	try {
-		const { MSG, ERROR } = req.app.locals;
-		const user = { ...req.body, idx: req.user.idx, status: req.user.status }
-		const { success } = await deleteUser (user)
-		if(success) {
-			req.logOut()
-			req.session.destroy()
+    const { ALERT, ERROR } = req.app.locals;
+    const user = { ...req.body, idx: req.user.idx, status: req.user.status }
+		const { success } = await deleteUser(user)
+    if(success) {
+      req.logout()
 			res.locals.user = null
-			res.send(alert(MSG.WITHDRAWAL))
-			
-		}
-		else res.send(alert(ERROR.SQL_ERROR))
+      res.send(alert(ALERT.WITHDRAWAL))
+    }
+    else res.send(alert(ERROR.SQL_ERROR))
 	}
 	catch(err) {
 		next(createError(err))
